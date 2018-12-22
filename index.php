@@ -65,7 +65,7 @@
         $postId = $_POST["delete"];
         // Find the post with the given id and delete it
         $blog_store->deleteOne(['_id' => new MongoDB\BSON\ObjectId($postId)]);
-        // getDBPosts($blog_store);
+        header("Refresh:0");
       }
     ?>
   </div>
