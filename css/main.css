@@ -3,6 +3,17 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px auto;
+}
+
+h2 {
+  margin-top: 70px;
+  margin-left: 40px;
 }
 
 form {
@@ -12,9 +23,33 @@ form {
   margin: 30px auto;
 }
 
+#main-form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+#main-form input {
+  height: 35px;
+  padding: 0 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ddd;
+}
+
+#main-form input[type="submit"] {
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 0;
+  background-color: lightgreen;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
 .post-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 30px;
   padding: 40px;
 }
@@ -25,8 +60,34 @@ form {
   justify-content: center;
   align-items: space-around;
   text-align: center;
-  background-color: #fff;
-  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  background-color: tomato;
   height: 200px;
+  clip-path: polygon(0 30%, 100% 30%, 100% 70%, 0 70%);
+  transition: all 500ms ease;
+  color: white;
+  position: relative;
+}
+.post:hover {
+  clip-path: polygon(0 20%, 100% 0%, 100% 80%, 0 100%);
+}
+
+.hidden {
+  display: none;
+}
+
+.delete-form {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 50px;
+  width: 50px;
+}
+
+.delete-button {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: none;
+  color: #fff;
 }

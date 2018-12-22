@@ -8,18 +8,16 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <h1>Blog store</h1>
-  <hr>
-  <form action="index.php" method="post">
+  <h1>My PHP Blog</h1>
+  <form action="index.php" method="post" id="main-form">
     <label for="title">Title</label>
     <input type="text" name="title" id="title" placeholder="Post title">
     <label for="author">Author</label>
     <input type="text" name="author" id="author" placeholder="Post author">
     <label for="year">Year</label>
     <input type="text" name="year" id="year" placeholder="Post year">
-    <input type="submit" value="Store">
+    <input type="submit" value="Upload">
   </form>
-  <hr>
   <h2>Posts</h2>
   <div class="post-container">
     <?php
@@ -46,13 +44,28 @@
       }
 
       // Find all posts and render them into the page
-      $posts = $blog_store->find();
+      function getDBPosts($collection) {
 
-      foreach ($posts as $key => $value) {
-        $title = $value["title"];
-        $author = $value["author"];
-        $year = $value["year"];
-        include "templates/post.php";
+        $posts = $collection->find();
+
+        foreach ($posts as $key => $value) {
+          $title = $value["title"];
+          $author = $value["author"];
+          $year = $value["year"];
+          $id = $value["_id"];
+          include "templates/post.php";
+        }
+      }
+
+      getDBPosts($blog_store);
+
+      // Listen for delete requests
+      if (isset($_POST["delete"])) {
+        // Store the post id for quick access
+        $postId = $_POST["delete"];
+        // Find the post with the given id and delete it
+        $blog_store->deleteOne(['_id' => new MongoDB\BSON\ObjectId($postId)]);
+        // getDBPosts($blog_store);
       }
     ?>
   </div>
